@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+    <title id="title"></title>
+  </head>
+  <body class="flex justify-center items-center h-screen bg-stone-900">
+    <div
+      class="w-5/6 md:w-1/2 lg:w-1/2 bg-stone-800 p-8 rounded-2xl flex items-center"
+    >
+      <div>
+        <h1 id="exam" class="text-5xl font-bold text-stone-100 mb-4">
+          JEE Mains April
+        </h1>
+        <h1 class="text-3xl text-stone-200" id="counter"></h1>
+      </div>
+    </div>
+
+    <script>
+      fetch("./exam-info.json")
+        .then((response) => response.json())
+        .then((exam) => {
+          document.getElementById("title").innerHTML = exam.name;
+          document.getElementById("exam").innerHTML = exam.name;
+
+          var previousTime = 0;
+
+          function updateTimer() {
+            var currentTime = new Date().getTime();
+
+            if (currentTime - previousTime >= 1000) {
+              previousTime = currentTime;
+
+              var countDownDate = new Date(exam.date).getTime();
+              var distance = countDownDate - currentTime;
+              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              var hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+              );
+              var minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60)
+              );
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+              document.getElementById("counter").innerHTML =
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+              if (distance < 0) {
+                document.getElementById("counter").innerHTML = "EXPIRED";
+              }
+            }
+
+            requestAnimationFrame(updateTimer);
+          }
+
+          updateTimer();
+        });
+    </script>
+  </body>
+</html>
