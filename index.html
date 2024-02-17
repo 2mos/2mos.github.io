@@ -54,6 +54,7 @@
               id="examName"
               type="text"
               placeholder="Enter exam name"
+              required
             />
           </div>
 
@@ -69,6 +70,7 @@
               class="shadow dark:bg-neutral-800 dark:text-neutral-100 appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               id="examDate"
               type="date"
+              required
             />
           </div>
 
@@ -252,6 +254,13 @@
         submitBtn.addEventListener("click", function () {
           var examName = document.getElementById("examName").value;
           var examDate = new Date(document.getElementById("examDate").value);
+          if (
+            examName == null ||
+            examName == "" ||
+            document.getElementById("examDate").value == ""
+          ) {
+            return;
+          }
           let exam = {
             name: examName,
             date: examDate.toDateString(),
