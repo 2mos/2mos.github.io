@@ -35,7 +35,7 @@
         </button>
       </div>
       <div
-        class="max-w-md mx-auto mt-3 transition-opacity ease-linear opacity-0 duration-100"
+        class="max-w-md mx-auto mt-3 transition-all ease-linear opacity-0 duration-100 invisible"
         id="form"
       >
         <form
@@ -211,6 +211,7 @@
         addExamBtn.addEventListener("click", () => {
           form.classList.toggle("opacity-100");
           form.classList.toggle("opacity-0");
+          form.classList.toggle("invisible");
         });
 
         document.onmousedown = (e) => {
@@ -218,6 +219,7 @@
           if (!form.contains(e.target) && !addExamBtn.contains(e.target)) {
             form.classList.toggle("opacity-100", false);
             form.classList.toggle("opacity-0", true);
+            form.classList.toggle("invisible", true);
           }
         };
 
