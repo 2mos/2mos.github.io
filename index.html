@@ -13,39 +13,41 @@
   <body
     class="static transition-colors duration-500 bg-stone-100 dark:bg-stone-900"
   >
-    <div class="z-10 absolute m-3 top-0 flex flex-col">
+    <div class="z-10 absolute m-3 top-0 flex flex-col hover:border-collapse">
       <div class="flex flex-row">
         <button
-          class="hover:bg-blue-400 bg-white top-0 p-3 bg-stone v-screen mr-2 flex justify-center items-center dark:hover:bg-blue-300 dark:bg-stone-800 dark:text-stone-100 rounded-xl"
+          class="bg-white shadow top-0 p-3 bg-stone v-screen mr-2 flex justify-center items-center dark:bg-stone-800 dark:text-stone-100 rounded-xl"
           id="addExamBtn"
         >
           <span class="material-symbols-outlined">add</span>
         </button>
         <button
-          class="hover:bg-blue-400 bg-white top-0 p-3 v-screen mr-2 flex justify-center items-center dark:hover:bg-blue-300 dark:bg-stone-800 dark:text-stone-100 rounded-xl"
+          class="bg-white shadow top-0 p-3 v-screen mr-2 flex justify-center items-center dark:bg-stone-800 dark:text-stone-100 rounded-xl"
           id="nextExamBtn"
         >
           <span class="material-symbols-outlined">navigate_next</span>
         </button>
         <button
-          class="hover:bg-blue-400 bg-white invisible top-0 p-3 v-screen flex justify-center items-center dark:hover:bg-blue-300 dark:bg-stone-800 dark:text-stone-100 rounded-xl"
+          class="shadow bg-white invisible top-0 p-3 v-screen flex justify-center items-center dark:bg-stone-800 dark:text-stone-100 rounded-xl"
           id="deleteExamBtn"
         >
           <span class="material-symbols-outlined">remove</span>
         </button>
       </div>
       <div class="max-w-md mx-auto mt-3 invisible" id="form">
-        <form class="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4">
+        <form
+          class="bg-white dark:bg-stone-800 shadow-md rounded-xl px-8 pt-6 pb-8 mb-4"
+        >
           <!-- Exam Name Input -->
           <div class="mb-4">
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-gray-700 dark:text-stone-100 text-sm font-bold mb-2"
               for="examName"
             >
               Exam Name
             </label>
             <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow dark:bg-stone-800 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="examName"
               type="text"
               placeholder="Enter exam name"
@@ -55,13 +57,13 @@
           <!-- Exam Date Input -->
           <div class="mb-4">
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-gray-700 dark:text-stone-100 text-sm font-bold mb-2"
               for="examDate"
             >
               Exam Date
             </label>
             <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow dark:bg-stone-800 appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               id="examDate"
               type="date"
             />
@@ -69,7 +71,7 @@
 
           <!-- Submit Button -->
           <button
-            class="v-screen flex justify-center items-center bg-blue-400 hover:bg-blue-500 text-black font-bold p-3 rounded-xl focus:outline-none focus:shadow-outline"
+            class="v-screen flex justify-center items-center bg-blue-400 text-black font-bold p-3 rounded-xl focus:outline-none focus:shadow-outline"
             id="submitBtn"
             type="submit"
           >
@@ -81,7 +83,7 @@
 
     <div class="relative h-screen flex justify-center items-center">
       <div
-        class="w-5/6 md:w-1/2 lg:w-1/2 bg-white dark:bg-stone-800 p-8 rounded-2xl flex items-center"
+        class="w-5/6 md:w-1/2 lg:w-1/2 shadow bg-white dark:bg-stone-800 p-8 rounded-2xl flex items-center"
       >
         <div>
           <h1
@@ -199,11 +201,18 @@
         });
 
         let addExamBtn = document.getElementById("addExamBtn");
+        let form = document.getElementById("form");
 
         addExamBtn.addEventListener("click", () => {
-          let form = document.getElementById("form");
           form.classList.toggle("invisible");
         });
+
+        document.onmousedown = (e) => {
+          // console.log(e.target);
+          if (!form.contains(e.target) && !addExamBtn.contains(e.target)) {
+            form.classList.toggle("invisible", true);
+          }
+        };
 
         let deleteExamBtn = document.getElementById("deleteExamBtn");
         deleteExamBtn.addEventListener("click", () => {
