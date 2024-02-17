@@ -1,4 +1,14 @@
-{
+[
+  {
     "name": "JEE Mains April",
     "date": "April 4, 2024 9:00:00"
-}
+  },
+  {
+    "name": "JEE Advanced",
+    "date": "May 26, 2024 9:00:00"
+  },
+  {
+    "name": "BITSAT",
+    "date": "May 21, 2024 9:00:00"
+  }
+]
